@@ -1,0 +1,7 @@
+.carousel-image {
+    width: 100%; /* or specify a specific width if desired */
+    height: 300px; /* adjust this to your preferred height */
+    object-fit: cover; /* this ensures the image covers the entire area without distortion */
+    object-position: center; /* centers the image within the defined area */
+  }
+  
