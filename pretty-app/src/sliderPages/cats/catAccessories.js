@@ -3,14 +3,14 @@ import { Box, Drawer, FormControlLabel, Checkbox, Button, Typography, IconButton
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ProductCard from '../components/productCard';
+import ProductCard from '../../components/productCard';
 
 // Dummy data for products
 const products = [
-  { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry', pet: 'Dog' },
-  { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy', pet: 'Cat' },
-  { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy', pet: 'Bird' },
-  { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry', pet: 'Fish' },
+  { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Collars' },
+  { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Bowls' },
+  { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Mats' },
+  { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Beds' },
   // Add more products as needed
 ];
 
@@ -18,10 +18,8 @@ const FilterableProductPage = () => {
   const [filters, setFilters] = useState({
     Price: [],
     Category: [],
-    Size: [],
     Discount: [],
-    Brands: [],
-    Pets: [] 
+    Brands: []
   });
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -57,10 +55,6 @@ const FilterableProductPage = () => {
       filtered = filtered.filter(product => filters.Category.includes(product.category));
     }
 
-    // Apply Size filter
-    if (filters.Size.length > 0) {
-      filtered = filtered.filter(product => filters.Size.includes(product.Size));
-    }
 
     // Apply Discount filter
     if (filters.Discount.length > 0) {
@@ -75,11 +69,6 @@ const FilterableProductPage = () => {
     // Apply Brands filter
     if (filters.Brands.length > 0) {
       filtered = filtered.filter(product => filters.Brands.includes(product.brandName));
-    }
-
-    // Apply Pets filter
-    if (filters.Pets.length > 0) {
-      filtered = filtered.filter(product => filters.Pets.includes(product.pet));
     }
 
     setFilteredProducts(filtered);
@@ -108,12 +97,9 @@ const FilterableProductPage = () => {
         <Box sx={{ width: 250, padding: 2 }}>
           {[
             { label: "Price", options: ["0-200", "200-400", "400-600", "600-800", "800-1000"] },
-            { label: "Category", options: ["T Shirt", "Sweater", "Rain Coat", "Festive Wear"] },
-            { label: "Size", options: ["S", "M", "L", "Xl"] },
+            { label: "Category", options: ["Beds", "Bowls", "Mats", "Collars"] },
             { label: "Discount", options: ["20%", "30%", "40%", "50%", "60%"] },
-            { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] },
-            { label: "Pets", options: ["Bird", "Cat", "Dog", "Fish", "Others"] } 
-
+            { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] }
           ].map(filterCategory => (
             <Box key={filterCategory.label} sx={{ marginBottom: 2 }}>
               <Typography variant="h6" onClick={() => handleExpandClick(filterCategory.label)}>

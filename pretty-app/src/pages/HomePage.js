@@ -1,12 +1,14 @@
 // src/components/Homepage.js
 
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import Navigation from '../components/appbar';
 import MyCarousel from '../components/carousel';
 import CategoryMenu from '../components/categorymenu';
-import CategorySlider from '../components/categoryslider';
-import CategorySlider2 from '../components/categoryslider2';
+import ItemsSliderDog from '../components/itemsSliderDog';
+import ItemsSliderCat from '../components/itemsSliderCat';
+import ItemsSliderBird from '../components/itemsSliderBirds';
+import ItemsSliderFish from '../components/itemsSliderFish';
+
 import Footer from '../components/footer';
 
 
@@ -16,8 +18,10 @@ function Homepage() {
       <Navigation />
       <MyCarousel />
       <CategoryMenu />
-      <CategorySlider />
-      <CategorySlider2 />
+      <ItemsSliderDog />
+      <ItemsSliderCat />
+      <ItemsSliderBird />
+      <ItemsSliderFish />
       <Footer />
       
     </div>

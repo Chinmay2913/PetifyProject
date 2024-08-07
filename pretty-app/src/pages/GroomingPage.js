@@ -7,10 +7,11 @@ import ProductCard from '../components/productCard';
 
 // Dummy data for products
 const products = [
-  { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Combs'},
-  { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Conditioners' },
-  { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Nail Clippers'},
-  { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Shampoos' },
+  { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry', pet: 'Dog' },
+  { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy', pet: 'Cat' },
+  { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy', pet: 'Bird' },
+  { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry', pet: 'Fish' },
+  // Add more products as needed
   // Add more products as needed
 ];
 
@@ -19,7 +20,8 @@ const FilterableProductPage = () => {
     Price: [],
     Category: [],
     Discount: [],
-    Brands: []
+    Brands: [],
+    Pets: [] 
   });
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -69,6 +71,10 @@ const FilterableProductPage = () => {
     if (filters.Brands.length > 0) {
       filtered = filtered.filter(product => filters.Brands.includes(product.brandName));
     }
+    // Apply Pets filter
+    if (filters.Pets.length > 0) {
+      filtered = filtered.filter(product => filters.Pets.includes(product.pet));
+    }
 
     setFilteredProducts(filtered);
   };
@@ -98,7 +104,9 @@ const FilterableProductPage = () => {
             { label: "Price", options: ["0-200", "200-400", "400-600", "600-800", "800-1000"] },
             { label: "Category", options: ["Shampoos", "Conditioners", "Nail Clippers", "Combs"] },
             { label: "Discount", options: ["20%", "30%", "40%", "50%", "60%"] },
-            { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] }
+            { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] },
+            { label: "Pets", options: ["Bird", "Cat", "Dog", "Fish", "Others"] } 
+
           ].map(filterCategory => (
             <Box key={filterCategory.label} sx={{ marginBottom: 2 }}>
               <Typography variant="h6" onClick={() => handleExpandClick(filterCategory.label)}>

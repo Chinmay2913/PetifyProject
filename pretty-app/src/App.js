@@ -8,15 +8,29 @@ import FoodPage from './pages/FoodPage';
 import AccessoriesPage from './pages/AccessoriesPage';
 import GroomingPage from './pages/GroomingPage';
 import ClothingsPage from './pages/ClothingsPage';
+import DogAccessories from './sliderPages/dogs/dogAccessories';
+import DogClothing from './sliderPages/dogs/dogClothing';
+import DogFoods from './sliderPages/dogs/dogFoods';
+import DogGrooming from './sliderPages/dogs/dogGromming';
+import DogToys from './sliderPages/dogs/dogToys';
 
-// import PricingPage from './pages/PricingPage';
-// import OrdersPage from './pages/OrdersPage';
-// import HelpPage from './pages/HelpPage';
-// import SettingsPage from './pages/SettingsPage';
-// import CartPage from './pages/CartPage';
-// import ContactPage from './pages/ContactPage';
-// import AccountPage from './pages/AccountPage';
-// import ProfilePage from './pages/ProfilePage';
+import CatAccessories from './sliderPages/cats/catAccessories';
+import CatClothing from './sliderPages/cats/catClothing';
+import CatFoods from './sliderPages/cats/catFoods';
+import CatGrooming from './sliderPages/cats/catGromming';
+import CatToys from './sliderPages/cats/catToys';
+
+import BirdAccessories from './sliderPages/birds/birdAccessories';
+import BirdClothing from './sliderPages/birds/birdClothing';
+import BirdFoods from './sliderPages/birds/birdFoods';
+import BirdGrooming from './sliderPages/birds/birdGromming';
+import BirdToys from './sliderPages/birds/birdToys';
+
+import FishAccessories from './sliderPages/fishes/fishAccessories';
+import FishClothing from './sliderPages/fishes/fishClothing';
+import FishFoods from './sliderPages/fishes/fishFoods';
+import FishGrooming from './sliderPages/fishes/fishGromming';
+import FishToys from './sliderPages/fishes/fishToys';
 
 function App() {
   return (
@@ -28,14 +42,35 @@ function App() {
         <Route path="/Accessories" element={<AccessoriesPage />} />
         <Route path="food" element={<FoodPage />} />
         <Route path="/Toys" element={<ToysPage />} />
-        {/* <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/account" element={<AccountPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/help" element={<HelpPage />} /> */}
+       
+        <Route path="/dogs/Accessories" element={<DogAccessories />} />
+        <Route path="/dogs/Food" element={<DogFoods />} />
+        <Route path="/dogs/Clothing" element={<DogClothing />} />
+        <Route path="/dogs/Grooming" element={<DogGrooming />} />
+        <Route path="/dogs/Toys" element={<DogToys />} />
+
+        <Route path="/cats/Accessories" element={<CatAccessories />} />
+        <Route path="/cats/Food" element={<CatFoods />} />
+        <Route path="/cats/Clothing" element={<CatClothing />} />
+        <Route path="/cats/Grooming" element={<CatGrooming />} />
+        <Route path="/cats/Toys" element={<CatToys />} />
+
+        <Route path="/birds/Accessories" element={<BirdAccessories />} />
+        <Route path="/birds/Food" element={<BirdFoods />} />
+        <Route path="/birds/Clothing" element={<BirdClothing />} />
+        <Route path="/birds/Grooming" element={<BirdGrooming />} />
+        <Route path="/birds/Toys" element={<BirdToys />} />
+
+        <Route path="/fish/Accessories" element={<FishAccessories />} />
+        <Route path="/fish/Food" element={<FishFoods />} />
+        <Route path="/fish/Clothing" element={<FishClothing />} />
+        <Route path="/fish/Grooming" element={<FishGrooming />} />
+        <Route path="/fish/Toys" element={<FishToys />} />
+
+
+
+
+
       </Routes>
     </div>
   );

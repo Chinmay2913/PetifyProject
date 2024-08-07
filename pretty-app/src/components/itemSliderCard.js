@@ -13,7 +13,7 @@ const ProductCard = ({ image, brandName, price, discountPercentage, onClick }) =
       <Card
       onClick={onClick}
         sx={{
-          margin: 1,
+          margin: '1%',
           maxWidth: 345,
           transition: 'transform 0.5s, box-shadow 0.5s',
           '&:hover': {
@@ -22,7 +22,7 @@ const ProductCard = ({ image, brandName, price, discountPercentage, onClick }) =
           },
           boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
           height: '100%',
-          width: 200,
+          width: 270,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between'
