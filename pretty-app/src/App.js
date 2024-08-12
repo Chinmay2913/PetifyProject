@@ -32,15 +32,20 @@ import FishFoods from './sliderPages/fishes/fishFoods';
 import FishGrooming from './sliderPages/fishes/fishGromming';
 import FishToys from './sliderPages/fishes/fishToys';
 
+import SearchResultsPage from './pages/Searchpage';
+//<Route path="/product/:id" element={<ProductDetailsPage />} />      
+
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path='/' element={<Homepage/>}></Route>
-      <Route path="/Clothing" element={<ClothingsPage />} />
+
+        <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/Clothing" element={<ClothingsPage />} />
         <Route path="/Grooming" element={<GroomingPage />} />
         <Route path="/Accessories" element={<AccessoriesPage />} />
-        <Route path="food" element={<FoodPage />} />
+        <Route path="/Food" element={<FoodPage />} />
         <Route path="/Toys" element={<ToysPage />} />
        
         <Route path="/dogs/Accessories" element={<DogAccessories />} />
@@ -67,6 +72,7 @@ function App() {
         <Route path="/fish/Grooming" element={<FishGrooming />} />
         <Route path="/fish/Toys" element={<FishToys />} />
 
+              
 
 
 

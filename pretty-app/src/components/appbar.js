@@ -15,6 +15,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import ProductCard from './productCard';
+import { useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,13 +56,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+const categories = [
+  { name: 'Food', subtypes: ['dog/food', 'cat/food', 'fish/food', 'birds/food'] },
+  { name: 'Clothing', subtypes: ['dog/clothing', 'cat/clothing', 'birds/clothing'] },
+  { name: 'Grooming', subtypes: ['dog/grooming', 'cat/grooming', 'fish/grooming', 'bird/grooming'] },
+  { name: 'Accessories', subtypes: ['dog/accessories', 'cat/accessories', 'fish/accessories', 'bird/accessories'] },
+  { name: 'Toys', subtypes: ['dog/toys', 'cat/toys', 'birds/toys', 'fish/toys'] },
+];
 
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [searchTerm, setSearchTerm] = React.useState('');
+  const [searchResults, setSearchResults] = React.useState([]);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const navigate = useNavigate();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,7 +90,31 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
+  const handleSearch = () => {
+    const results = categories.flatMap(category => 
+      category.subtypes.filter(subtype => subtype.toLowerCase().includes(searchTerm.toLowerCase()))
+        .map(subtype => ({ category: category.name, subtype }))
+    );
+    //setSearchResults(results);
+    navigate('/search', { state: { searchResults: results } });  };
+  // const handleSearch = () => {
+  //   navigate(`/search?query=${searchTerm}`);
+  // };
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+  
+  const handleProductClick = (product) => {
+    // Navigate to the product details page, passing the product ID or any other necessary data
+    navigate(`/product/${product.id}`, { state: { product } });
+  };
+  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -165,11 +201,14 @@ export default function PrimarySearchAppBar() {
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon />
+              <SearchIcon onClick={handleSearch} />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+             placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              value={searchTerm}
+              onChange={handleSearchChange}
+              onKeyPress={handleKeyPress}
             />
           </Search>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 4 }}>
@@ -233,9 +272,22 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      {/* Add padding to the top of the main content */}
       <Box component="main" sx={{ pt: 8, pb: 2 }}>
-        {/* Your main content goes here */}
+        {/* Display search results using ProductCard */}
+        {searchResults.length > 0 && (
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 2 }}>
+            {searchResults.map((result, index) => (
+              <ProductCard
+                key={index}
+                image={result.image}
+                brandName={result.brandName}
+                price={result.price}
+                discountPercentage={result.discountPercentage}
+                onClick={() => handleProductClick(result)}
+              />
+            ))}
+          </Box>
+        )}
       </Box>
     </Box>
   );

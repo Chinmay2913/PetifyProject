@@ -127,10 +127,10 @@ export default function Footer() {
               Useful links
             </Typography>
             <FooterLinks>
-              <FooterLink to="/pricing">Pricing</FooterLink>
-              <FooterLink to="/settings">Settings</FooterLink>
-              <FooterLink to="/orders">Orders</FooterLink>
-              <FooterLink to="/help">Help</FooterLink>
+              <FooterLink to="/pricing">ARC Foundation</FooterLink>
+              <FooterLink to="/settings">RESQ Charitable Trust</FooterLink>
+              <FooterLink to="/orders">Animal Rescue Trust</FooterLink>
+              <FooterLink to="/help">Karma Foundation</FooterLink>
             </FooterLinks>
           </FooterColumn>
 
