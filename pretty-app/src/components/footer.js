@@ -127,10 +127,40 @@ export default function Footer() {
               Useful links
             </Typography>
             <FooterLinks>
-              <FooterLink to="/pricing">ARC Foundation</FooterLink>
-              <FooterLink to="/settings">RESQ Charitable Trust</FooterLink>
-              <FooterLink to="/orders">Animal Rescue Trust</FooterLink>
-              <FooterLink to="/help">Karma Foundation</FooterLink>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <a 
+        href="https://www.arcfoundation.org" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        ARC Foundation
+      </a>
+      <a 
+        href="https://www.resqcharitabletrust.org" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        RESQ Charitable Trust
+      </a>
+      <a 
+        href="https://www.animalrescuetrust.org" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        Animal Rescue Trust
+      </a>
+      <a 
+        href="https://www.karmafoundation.org" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        style={{ color: 'black', textDecoration: 'none' }}
+      >
+        Karma Foundation
+      </a>
+      </div>
             </FooterLinks>
           </FooterColumn>
 

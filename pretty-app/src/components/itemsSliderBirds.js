@@ -4,6 +4,8 @@ import { Box, Divider, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../components/itemSliderCard'; // Import the ProductCard component
+import Lottie from 'lottie-react';
+import animationData from '../assets/bird.json';
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -78,9 +80,14 @@ export default function CategoryCarousel() {
           marginBottom: '16px', // Space between header and carousel
         }}
       >
-        <Typography variant="h6">
-          Birds
+        <Lottie animationData={animationData} style={{ height: 55, width: 55 }} />
+        <Typography variant="h6"   sx={{ 
+    fontSize: '1.5rem', // Adjust size as needed
+    fontWeight: 'bold' 
+  }} >
+          BIRDS
         </Typography>
+        <Lottie animationData={animationData} style={{ height: 55, width: 55 }} />
       </Box>
 
       {/* Carousel with static items */}
