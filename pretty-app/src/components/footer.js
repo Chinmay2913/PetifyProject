@@ -192,3 +192,33 @@ export default function Footer() {
     </FooterContainer>
   );
 }
+/*
+
+Main Components and Variables:
+  FooterContainer: A styled Box component that serves as the outermost container for the footer. It defines the background color and padding.
+  FooterSection: A styled Box component that aligns the social media section in the center and provides spacing.
+  SocialIcons: A styled Box component that holds and arranges the social media icons horizontally.
+  IconButtonStyled: A styled IconButton component used for the social media links, with custom color and margin.
+  FooterLinks: A styled Box component that organizes the footer links in a column format.
+  FooterLink: A styled Link component that provides navigation to different pages within the application, with custom styling for hover effects.
+  FooterBottom: A styled Box component that serves as the bottom section of the footer, containing copyright information.
+  FooterColumn: A styled Box component that structures the content of each footer column, including company details, product links, useful links, and contact information.
+
+Key Sections:
+  Social Media Section:
+      FooterSection: Contains the message "Get connected with us on social networks" and displays social media icons using IconButtonStyled for platforms like Facebook, Twitter, Google, Instagram, LinkedIn, and GitHub.
+  Footer Columns Section:
+      Company Info (FooterColumn): Displays the company name and a brief description.
+      Products (FooterColumn): Lists links to different product categories such as Toys, Food, Clothing, Grooming, and Accessories, wrapped in FooterLinks.
+      Useful Links (FooterColumn): Provides external links to organizations such as ARC Foundation, RESQ Charitable Trust, Animal Rescue Trust, and Karma Foundation.
+      Contact (FooterColumn): Displays contact information including address, email, phone, and fax using Material-UI icons (Home, Email, Phone, Print).
+  Footer Bottom Section:  
+      FooterBottom: Displays the copyright notice with the current year.
+Usage
+This component is suitable for the footer section of any web application, providing a clean and organized structure 
+with social media links, navigation links, and contact information. The links can be customized to match the specific
+needs of the application.
+
+
+
+*/

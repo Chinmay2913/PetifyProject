@@ -292,3 +292,45 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+
+
+/*
+
+Main Components and Variables:
+    Search: A styled component to define the search bar's styling, including its width, margin, and background color.
+    SearchIconWrapper: A styled component to position the search icon inside the search bar.
+    StyledInputBase: A styled input component used to handle user input in the search bar.
+    categories: An array defining the different categories and their subtypes that are used for search functionality.
+    PrimarySearchAppBar: The main functional component defining the structure and behavior of the app bar.
+
+State Variables:
+    anchorEl: Manages the state for the main menu.
+    mobileMoreAnchorEl: Manages the state for the mobile menu.
+    searchTerm: Stores the current value entered in the search bar.
+    searchResults: Stores the filtered search results based on the user's input.
+
+Key Functions:
+    handleProfileMenuOpen: Opens the user profile menu.
+    handleMobileMenuClose: Closes the mobile version of the menu.
+    handleMenuClose: Closes the main menu and mobile menu.
+    handleMobileMenuOpen: Opens the mobile menu.
+    handleSearchChange: Updates the searchTerm state when the user types in the search bar.
+    handleSearch: Filters the categories based on the searchTerm and navigates to the search results page.
+    handleKeyPress: Triggers the search function when the 'Enter' key is pressed.
+    handleProductClick: Navigates to the product details page when a product is clicked.
+
+Menu and Search Result Rendering:
+    renderMenu: Renders the main user profile menu.
+    renderMobileMenu: Renders the menu for mobile devices.
+    Search Results: The search results are displayed using the ProductCard component in a grid layout if there are any results after the search.
+
+Usage:
+This component is typically used at the top of the web page as a persistent navigation bar, providing essential 
+features like search, cart access, user profile, and quick links to different sections of the site. 
+The search functionality is designed to allow users to quickly find products by typing keywords into the search bar, 
+with results dynamically displayed based on matching categories and subtypes.
+
+
+
+*/

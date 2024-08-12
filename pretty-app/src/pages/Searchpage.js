@@ -169,3 +169,39 @@ const SearchResultsPage = () => {
 };
 
 export default SearchResultsPage;
+
+
+/*
+
+Component State:
+  filters: An object storing selected filter options for different categories:
+    Price: Array of selected price ranges.
+    Category: Array of selected product categories.
+    Type: Array of selected product types.
+    Discount: Array of selected discount percentages.
+    Brands: Array of selected brand names.
+    Pets: Array of selected pet types.
+  filteredProducts: Array of products filtered based on the selected criteria.
+  drawerOpen: Boolean state for controlling the open/close state of the filter drawer.
+  expanded: Object tracking the expanded state of filter categories.
+
+Functions:
+  handleFilterChange: Toggles filter options in the filters state.
+  applyFilters: Filters the initialSearchResults based on selected filters and updates filteredProducts.
+  handleExpandClick: Toggles the expanded/collapsed state of filter categories in the drawer.
+  handleProductClick: Navigates to the product details page and passes the selected product as state.
+
+JSX Structure:
+  AppBar: Displays a header with a filter button and title.
+  Drawer: Contains filter options with collapsible sections:
+      Price
+      Category
+      Type
+      Discount
+      Brands
+      Pets
+  Product Grid: Displays filtered products in a responsive grid layout. Each product is rendered using 
+  the ProductCard component, which allows for navigation to the product details page when clicked.
+
+
+*/

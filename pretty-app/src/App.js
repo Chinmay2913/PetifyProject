@@ -83,3 +83,73 @@ function App() {
 }
 
 export default App;
+
+/**
+ Variables Used:
+App: The main functional component that sets up the routes for the application.
+
+Homepage, SearchResultsPage, ClothingsPage, GroomingPage, AccessoriesPage, FoodPage, ToysPage: 
+    Components representing the main pages of the website.
+
+DogAccessories, DogFoods, DogClothing, DogGrooming, DogToys: 
+    Components representing dog-related product categories.
+
+CatAccessories, CatFoods, CatClothing, CatGrooming, CatToys:
+    Components representing cat-related product categories.
+
+BirdAccessories, BirdFoods, BirdClothing, BirdGrooming, BirdToys: 
+    Components representing bird-related product categories.
+
+FishAccessories, FishFoods, FishClothing, FishGrooming, FishToys: 
+    Components representing fish-related product categories.
+
+
+Routing Structure:
+The application uses the Routes component from React Router to define different paths (URLs) and the corresponding components that should be rendered when the path is accessed.
+
+/ (Root Path):
+
+Renders the Homepage component.
+/search:
+Renders the SearchResultsPage component.
+
+
+Main Category Routes:
+
+/Clothing: Renders the ClothingsPage.
+/Grooming: Renders the GroomingPage.
+/Accessories: Renders the AccessoriesPage.
+/Food: Renders the FoodPage.
+/Toys: Renders the ToysPage.
+
+Dog Subcategories:
+    /dogs/Accessories: Renders the DogAccessories component.
+    /dogs/Food: Renders the DogFoods component.
+    /dogs/Clothing: Renders the DogClothing component.
+    /dogs/Grooming: Renders the DogGrooming component.
+    /dogs/Toys: Renders the DogToys component.
+
+Cat Subcategories:
+    /cats/Accessories: Renders the CatAccessories component.
+    /cats/Food: Renders the CatFoods component.
+    /cats/Clothing: Renders the CatClothing component.
+    /cats/Grooming: Renders the CatGrooming component.
+    /cats/Toys: Renders the CatToys component.
+
+
+Bird Subcategories:
+    /birds/Accessories: Renders the BirdAccessories component.
+    /birds/Food: Renders the BirdFoods component.
+    /birds/Clothing: Renders the BirdClothing component.
+    /birds/Grooming: Renders the BirdGrooming component.
+    /birds/Toys: Renders the BirdToys component.
+
+Fish Subcategories:
+    /fish/Accessories: Renders the FishAccessories component.
+    /fish/Food: Renders the FishFoods component.
+    /fish/Clothing: Renders the FishClothing component.
+    /fish/Grooming: Renders the FishGrooming component.
+    /fish/Toys: Renders the FishToys component.
+
+    
+ */

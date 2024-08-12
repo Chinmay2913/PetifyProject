@@ -31,7 +31,19 @@ function Homepage() {
 export default Homepage;
 
 
+/*
+Structure:
+  <div className="Homepage">: Wrapper for the entire homepage layout.
+    <Navigation />: Renders the top navigation bar.
+    <MyCarousel />: Displays a carousel for featured products or promotions.
+    <CategoryMenu />: Shows a menu for navigating different product categories.
+    <ItemsSliderDog />: Displays a slider of items specifically for dogs.
+    <ItemsSliderCat />: Displays a slider of items specifically for cats.
+    <ItemsSliderBird />: Displays a slider of items specifically for birds.
+    <ItemsSliderFish />: Displays a slider of items specifically for fish.
+    <Footer />: Renders the footer with additional links or information.
 
+*/
 
 
          

@@ -120,3 +120,40 @@ export default function CategoryCarousel() {
     </Box>
   );
 }
+
+
+/*
+
+
+Description:
+The CategoryCarousel component displays a carousel of product cards for various categories with animation effects and 
+a header section. It allows navigation to a detailed page for each category when a product card is clicked.
+
+Variables and Props:
+  items (array): Contains product details to be displayed in the carousel. Each item has:
+    id (string): Unique identifier for the item.
+    image (string): URL of the product image.
+    brandName (string): Brand name of the product.
+    price (number): Price of the product.
+    discountPercentage (number): Discount percentage on the product.
+
+  currentIndex (number): Index of the current slide in the carousel, used for shifting the carousel view.
+  itemsPerSlide (number): Number of items to display per slide.
+  navigate (function): Function from useNavigate hook to handle navigation.
+  handleCardClick (function): Handles card click events and navigates to the specific category detail page.
+
+Components:
+  CarouselContainer: Styled container for the carousel, using the Box component with flexbox layout and custom styling.
+  CategoryCarousel: Main functional component containing:
+    Header Section: Includes animated Lottie icons and a title "BIRDS".
+    Carousel: Displays the ProductCard components in a horizontal scrollable layout.
+    Divider: A styled divider separating the carousel from other content.
+
+Styles and Behavior:
+    Header Section: Displays Lottie animations and a title with a background overlay.
+    CarouselContainer: Uses translateX for slide transitions based on currentIndex.
+    ProductCard: Renders product details and handles click events to navigate to detailed category pages.
+    Divider: Adds visual separation below the carousel.
+
+
+*/

@@ -76,3 +76,37 @@ const CategoryList = () => {
 };
 
 export default CategoryList;
+
+
+/*
+Main Component and Variables:
+        categories: An array of objects where each object represents a product category. Each object contains:
+        label: A string representing the category name (e.g., 'Food', 'Clothing').
+        icon: A JSX element that renders the category's associated icon.
+        link: A string representing the URL path to which the category should navigate when clicked.
+
+
+CategoryList: The main functional component that renders the list of categories.
+        Uses the Box component to create a container with padding and a background color.
+        Uses the Grid component to create a responsive grid layout where each category is displayed as a grid item.
+        Maps through the categories array to render each category as a Grid item.
+
+Key Features
+
+Grid Layout:
+    The categories are displayed in a responsive grid layout that adjusts based on screen size (xs, sm, md breakpoints).
+    Link: Wraps each category item in a Link component for internal navigation.
+
+Paper Component:
+    Each category is rendered inside a Paper component, providing an elevated surface with rounded corners.
+    Includes a hover effect that slightly lifts the item and increases the shadow for a more interactive user experience.
+
+Icon and Label Display:
+    The icon is displayed inside a circular background, giving it prominence.
+    The category label is displayed below the icon with a bold font for emphasis.
+
+Usage
+The CategoryList component can be used on a landing page or in a sidebar to allow users to quickly navigate to different product categories. 
+The component is designed to be visually appealing and responsive, enhancing the user experience across various device sizes.
+
+*/

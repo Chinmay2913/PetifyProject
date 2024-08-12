@@ -71,3 +71,35 @@ const ProductCard = ({ image, brandName, price, discountPercentage, onClick }) =
 };
 
 export default ProductCard;
+
+/*
+Description
+The ProductCard component displays a product card with an image, brand name, price, and discount percentage. It includes animations for entering the view and hover effects.
+
+Props:
+    image (string): URL of the product image.
+    brandName (string): Name of the brand.
+    price (number): Price of the product.
+    discountPercentage (number): Discount percentage on the product.
+    onClick (function): Callback function to handle click events on the card.
+
+State:
+    checked (boolean): Indicates whether the card has been animated into view. 
+    Initialized to false, and set to true once the component mounts.
+
+Use of MUI Components:
+    Grow: Wraps the entire card to animate its appearance.
+    Fade: Wraps the CardMedia to animate the image's appearance.
+    Card: The main card component, including hover effects and styling.
+    CardMedia: Displays the product image.
+    CardContent: Contains the product details like brand name, price, and discount.
+    Typography: Used for text elements within the card.
+    Box: Used for layout and spacing within the CardContent.
+
+Styling:
+    The Card component has hover effects that scale the card and add a shadow.
+    The CardMedia is styled to cover the image area without distortion.
+    The CardContent has a background color and padding for better visual appeal.
+
+
+*/

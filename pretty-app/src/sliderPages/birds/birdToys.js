@@ -142,3 +142,42 @@ const FilterableProductPage = () => {
 };
 
 export default FilterableProductPage;
+
+
+/*
+
+Component State:
+  filters: An object that holds selected filter options:
+    Price: Array of selected price ranges.
+    Category: Array of selected product categories.
+    Discount: Array of selected discount percentages.
+    Brands: Array of selected brand names.
+  filteredProducts: Array of products that match the applied filters.
+  drawerOpen: Boolean indicating whether the filter drawer is open.
+  expanded: Object to track the expanded/collapsed state of each filter category.
+
+Functions:
+  handleFilterChange: Updates the filters state by toggling the selected filter option.
+  applyFilters: Filters the products array based on the selected filter criteria and updates filteredProducts.
+  handleExpandClick: Toggles the expanded state of a filter category in the drawer.
+
+JSX Structure
+  AppBar: Displays a header with a filter button and title.
+  Drawer: Contains filter options with collapsible sections:
+    Price
+    Category
+    Discount
+    Brands
+  Product Grid: Displays filtered products in a responsive grid layout using the ProductCard component.
+
+
+Variable Names Used:
+  filters: State object for managing selected filter options.
+  filteredProducts: State for storing products after applying filters.
+  drawerOpen: Boolean state for controlling the visibility of the filter drawer.
+  expanded: Object for managing the expanded/collapsed state of filter sections.
+  handleFilterChange: Function to update filter selections.
+  applyFilters: Function to apply selected filters and update displayed products.
+  handleExpandClick: Function to toggle the expanded state of filter categories.
+
+*/

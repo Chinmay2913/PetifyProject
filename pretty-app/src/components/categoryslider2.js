@@ -170,3 +170,43 @@ export default function CategoryCarousel() {
     </Box>
   );
 }
+
+
+/*
+
+Main Components and Variables:
+
+  CarouselContainer: A styled Box component that serves as the outer container for the carousel. It manages the overall width and overflow properties.
+  CarouselInner: A styled Box component that contains the carousel items and manages the transition effect when the carousel slides.
+  CarouselItem: A styled Paper component that represents each item within the carousel. It defines the appearance and spacing of each item.
+  OverlayContainer: A styled Box component that would typically hold overlay elements but is not directly used in the current implementation.
+  HeaderContainer: A styled Box component that arranges the category label and the "View All" button at the top of the carousel.
+  items: An array containing the details of each item to be displayed in the carousel. Each item is an object with:
+       id: A unique identifier for the item.
+       image: The URL of the item's image.
+
+  CategoryCarousel: The main functional component that renders the entire carousel.
+      currentIndex: State variable to track the current position of the carousel.
+      itemsPerSlide: The number of items visible in the carousel at once.
+      totalItems: The total number of items available in the carousel.
+
+  handleNext: Function to move the carousel forward by the number of items displayed per slide. It updates the currentIndex state.
+  handlePrev: Function to move the carousel backward by the number of items displayed per slide. It also updates the currentIndex state.
+  handleViewAll: Function that redirects the user to a page displaying all items within the category.
+  itemWidth: The width of each individual item in the carousel, used to calculate the overall carousel width and positioning.
+  carouselWidth: The calculated width of the visible area of the carousel based on the number of items per slide and their width.
+
+Key Features:
+    Responsive Design: The carousel dynamically adjusts its width based on the number of items and their widths.
+    Smooth Transitions: The CarouselInner component moves horizontally to display different items with a smooth sliding animation.
+    Navigation Buttons: Users can navigate through the items using the left and right arrow buttons (handlePrev and handleNext).
+    View All Button: The "View All" button (handleViewAll) allows users to navigate to a full view of all items in the category.
+    Custom Styling: The component uses the styled utility to define custom styles for various elements, including hover effects for the buttons and a styled divider for separation.
+
+Usage:
+This component is useful in e-commerce websites or any application where categories of items need to be showcased in
+a carousel format. It allows users to easily browse through a selection of items with the option to view all items 
+in the category
+
+
+*/

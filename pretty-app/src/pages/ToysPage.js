@@ -150,3 +150,35 @@ const FilterableProductPage = () => {
 };
 
 export default FilterableProductPage;
+
+
+
+
+/*
+
+State:
+  filters (object): Holds the selected filters for different categories:
+    Price (array): Selected price ranges (e.g., "0-200").
+    Category (array): Selected product categories (e.g., "Beds").
+    Discount (array): Selected discount percentages (e.g., "20%").
+    Brands (array): Selected brands (e.g., "Brand A").
+    Pets (array): Selected pet types (e.g., "Dog").
+  filteredProducts (array): List of products filtered based on the selected criteria.
+  drawerOpen (boolean): Controls whether the filter drawer is open or closed.
+  expanded (object): Tracks which filter categories are expanded in the drawer.
+
+Handlers:
+  handleFilterChange (function): Updates the filters state based on user interactions with checkboxes.
+  applyFilters (function): Applies the selected filters to the products array and updates filteredProducts.
+  handleExpandClick (function): Toggles the expanded state of filter categories in the drawer.
+
+UI Elements:
+  AppBar: Contains the filter icon and title.
+  Drawer: Sidebar for displaying filter options. It includes:
+    Box: Container for filter options and "Apply Filters" button.
+    Collapse: Expands or collapses filter categories.
+    FormControlLabel: Displays filter options with checkboxes.
+  ProductCard: Renders each product in the filteredProducts array.
+
+
+*/

@@ -71,3 +71,53 @@ const ProductCard = ({ image, brandName, price, discountPercentage, onClick }) =
 };
 
 export default ProductCard;
+
+
+/*
+
+Description
+The ProductCard component displays a card for a product with an image, brand name, price, and discount percentage. 
+It includes animations for entering the view and hover effects to enhance interactivity.
+
+Props:
+  image (string): URL of the product image.
+  brandName (string): Brand name of the product.
+  price (number): Price of the product.
+  discountPercentage (number): Discount percentage applied to the product.
+  onClick (function): Callback function to handle click events on the card.
+
+State:
+  checked (boolean): Tracks whether the card has been animated into view. 
+  Initially set to false and updated to true once the component mounts using useEffect.
+
+Use of MUI Components:
+  Grow: Animates the card's entrance into view.
+  Fade: Animates the image's entrance into view.
+  Card: The main container for the card content with hover effects and styling.
+  CardMedia: Displays the product image.
+  CardContent: Contains the text content, including brand name, price, and discount.
+  Typography: Used for rendering text with specific styles.
+  Box: Used for layout and spacing.
+
+Styling:
+  Card:
+    margin: Sets margin around the card.
+    maxWidth: Limits the maximum width of the card.
+    transition: Adds smooth transition effects for transform and box-shadow.
+    &:hover: Scales the card and adds a shadow on hover.
+    boxShadow: Provides an initial shadow effect.
+    height and width: Sets the dimensions of the card.
+    display: Flexbox layout for card content.
+  CardMedia:
+    height: Sets the height of the image.
+    sx: Styles the image with objectFit to cover the card area.
+  CardContent:
+    display: Flexbox layout for vertical alignment.
+    backgroundColor: Sets the background color.
+    padding: Adds padding inside the content area.
+  Typography:
+    variant: Defines the text style (e.g., h6 for title).
+    color: Sets text color.
+
+
+*/
