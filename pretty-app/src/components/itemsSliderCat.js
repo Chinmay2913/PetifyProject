@@ -1,8 +1,9 @@
 // src/components/CategoryCarousel.js
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Box, Divider, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+//import axios from 'axios'; // Import Axios
 import ProductCard from '../components/itemSliderCard'; // Import the ProductCard component
 import Lottie from 'lottie-react';
 import animationData from '../assets/cat.json';
@@ -57,9 +58,23 @@ const items = [
 ];
 
 export default function CategoryCarousel() {
+  // const [items, setItems] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerSlide = 6;
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   const fetchItems = async () => {
+  //     try {
+  //       const response = await axios.get('/api/categories'); // Adjust URL as needed
+  //       setItems(response.data); // Set the fetched data
+  //     } catch (error) {
+  //       console.error('Error fetching items:', error);
+  //     }
+  //   };
+
+  //   fetchItems();
+  // }, []); 
 
   const handleCardClick = (id) => {
     navigate(`/cats/${id}`);

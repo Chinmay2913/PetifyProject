@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Box, Drawer, FormControlLabel, Checkbox, Button, Typography, IconButton, AppBar, Toolbar, Collapse } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ProductCard from '../../components/productCard';
+import axios from 'axios'; // Import Axios
 
 // Dummy data for products
 const products = [
@@ -21,9 +22,27 @@ const FilterableProductPage = () => {
     Discount: [],
     Brands: []
   });
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [products, setProducts] = useState([]); // State for storing fetched products
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
+
+  useEffect(() => {
+    // Fetch products from the backend
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('/api/products'); // Adjust the URL as needed
+        setProducts(response.data);
+        setFilteredProducts(response.data); // Initialize filteredProducts with all fetched products
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []); // Empty dependency array means this effect runs once on component mount
+
 
   const handleFilterChange = (filterCategory, option) => {
     setFilters(prevFilters => {

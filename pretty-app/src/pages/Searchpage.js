@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios'; // Import Axios
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Box, Drawer, FormControlLabel, Checkbox, Button, Typography, IconButton, AppBar, Toolbar, Collapse } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -23,6 +24,18 @@ const SearchResultsPage = () => {
   const [filteredProducts, setFilteredProducts] = useState(initialSearchResults);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
+
+  useEffect(() => {
+    // Fetch data from the backend
+    axios.get('/api/products') // Replace with your backend endpoint
+      .then(response => {
+        setFilteredProducts(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  }, []); // Empty dependency array ensures this runs once on mount
+
 
   useEffect(() => {
     applyFilters();

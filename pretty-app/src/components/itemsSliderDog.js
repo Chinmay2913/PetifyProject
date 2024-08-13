@@ -1,10 +1,11 @@
 // src/components/CategoryCarousel.js
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Box, Divider, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../components/itemSliderCard'; // Import the ProductCard component
 import Lottie from 'lottie-react';
+//import axios from 'axios';
 import animationData from '../assets/dog.json';
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
@@ -58,8 +59,20 @@ const items = [
 
 export default function CategoryCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  // const [items, setItems] = useState([]);
   const itemsPerSlide = 6;
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   // Fetch items from the backend when the component mounts
+  //   axios.get('/api/dogs') // Replace with your backend endpoint
+  //     .then(response => {
+  //       setItems(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetching the data:', error);
+  //     });
+  // }, []);
 
   const handleCardClick = (id) => {
     navigate(`/dogs/${id}`);
@@ -120,6 +133,7 @@ export default function CategoryCarousel() {
     </Box>
   );
 }
+
 
 
 /*
