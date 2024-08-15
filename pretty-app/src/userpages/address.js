@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Container, TextField, Button, Checkbox, FormControlLabel, MenuItem, Select, Typography, Box } from '@mui/material';
-import './App.css'; // Import the CSS file
+import { Container, TextField, Button, Checkbox, MenuItem, Select, Typography, Box } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { postData } from '../services/apiservices'; // Import the postData function from the API file
+import '../cssFiles/Address.css'; // Import the CSS file
 
 const Address = () => {
   const [contactInfo, setContactInfo] = useState({ email: '', updates: false });
@@ -16,7 +18,24 @@ const Address = () => {
     whatsapp: '',
     saveInfo: false,
   });
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate(); // For navigation
 
+  // Validate form fields
+  const validateForm = () => {
+    const errors = {};
+    if (!contactInfo.email) errors.email = 'Email is required';
+    if (!shippingAddress.firstName) errors.firstName = 'First Name is required';
+    if (!shippingAddress.lastName) errors.lastName = 'Last Name is required';
+    if (!shippingAddress.address) errors.address = 'Address is required';
+    if (!shippingAddress.city) errors.city = 'City is required';
+    if (!shippingAddress.state) errors.state = 'State is required';
+    if (!shippingAddress.pincode) errors.pincode = 'PIN Code is required';
+    if (!/^\d{6}$/.test(shippingAddress.pincode)) errors.pincode = 'PIN Code must be 6 digits';
+    return errors;
+  };
+
+  // Handle contact info changes
   const handleContactChange = (e) => {
     const { name, value, type, checked } = e.target;
     setContactInfo({
@@ -25,6 +44,7 @@ const Address = () => {
     });
   };
 
+  // Handle shipping address changes
   const handleShippingChange = (e) => {
     const { name, value, type, checked } = e.target;
     setShippingAddress({
@@ -33,11 +53,21 @@ const Address = () => {
     });
   };
 
-  const handleSubmit = () => {
-    // Handle form submission logic
-    console.log('Contact Information:', contactInfo);
-    console.log('Shipping Address:', shippingAddress);
-    alert('Form submitted successfully!');
+  // Handle form submission
+  const handleSubmit = async () => {
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    try {
+      await postData('/api/submitAddress', { contactInfo, shippingAddress });
+      navigate('/order-confirmation'); // Navigate to the confirmation page
+    } catch (error) {
+      console.error('Error submitting address:', error);
+      alert('There was an error submitting your address.');
+    }
   };
 
   return (
@@ -51,6 +81,8 @@ const Address = () => {
         onChange={handleContactChange}
         className="input-field"
         fullWidth
+        error={!!errors.email}
+        helperText={errors.email}
       />
       <Box className="checkbox-group">
         <Checkbox
@@ -58,7 +90,7 @@ const Address = () => {
           checked={contactInfo.updates}
           onChange={handleContactChange}
         />
-        <Typography>Send me order updates, news and offers on Email and WhatsApp</Typography>
+        <Typography>Send me order updates, news, and offers on Email and WhatsApp</Typography>
       </Box>
 
       <Typography variant="h5" component="h2">Shipping Address</Typography>
@@ -83,6 +115,8 @@ const Address = () => {
           value={shippingAddress.firstName}
           onChange={handleShippingChange}
           className="input-field"
+          error={!!errors.firstName}
+          helperText={errors.firstName}
         />
         <TextField
           name="lastName"
@@ -91,6 +125,8 @@ const Address = () => {
           value={shippingAddress.lastName}
           onChange={handleShippingChange}
           className="input-field"
+          error={!!errors.lastName}
+          helperText={errors.lastName}
         />
       </Box>
       <TextField
@@ -101,6 +137,8 @@ const Address = () => {
         onChange={handleShippingChange}
         className="input-field"
         fullWidth
+        error={!!errors.address}
+        helperText={errors.address}
       />
       <TextField
         name="apartment"
@@ -119,6 +157,8 @@ const Address = () => {
           value={shippingAddress.city}
           onChange={handleShippingChange}
           className="input-field"
+          error={!!errors.city}
+          helperText={errors.city}
         />
         <TextField
           name="state"
@@ -127,6 +167,8 @@ const Address = () => {
           value={shippingAddress.state}
           onChange={handleShippingChange}
           className="input-field"
+          error={!!errors.state}
+          helperText={errors.state}
         />
         <TextField
           name="pincode"
@@ -135,6 +177,8 @@ const Address = () => {
           value={shippingAddress.pincode}
           onChange={handleShippingChange}
           className="input-field"
+          error={!!errors.pincode}
+          helperText={errors.pincode}
         />
       </Box>
       <TextField
@@ -155,7 +199,7 @@ const Address = () => {
         <Typography>Save this information for next time</Typography>
       </Box>
 
-      <Button onClick={handleSubmit} className="submit-btn" variant="contained">Continue to Shipping</Button>
+      <Button onClick={handleSubmit} className="submit-btn" variant="contained">Next</Button>
     </Container>
   );
 };

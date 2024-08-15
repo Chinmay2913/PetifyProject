@@ -1,29 +1,52 @@
+// src/pages/CartPage.js
 import React from 'react';
+import { Box, Typography, Button, Card, CardContent, CardMedia } from '@mui/material';
+import { useCart } from './CartContext';
+import { useNavigate } from 'react-router-dom';
 
-const CartItem = ({ item, onQuantityChange, onRemove }) => {
-  const handleQuantityChange = (delta) => {
-    onQuantityChange(item.id, item.quantity + delta);
+const CartPage = () => {
+  const { cart, clearCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleBuyNow = () => {
+    navigate('/address-details'); // Adjust the route as needed
   };
 
   return (
-    <div className="cart-item">
-      <img src={item.image} alt={item.name} className="cart-item-image" />
-      <div className="cart-item-details">
-        <h4>{item.name}</h4>
-        <p>Size - {item.size}</p>
-        <div className="cart-item-quantity">
-          <button onClick={() => handleQuantityChange(-1)} disabled={item.quantity <= 1}>-</button>
-          <span>{item.quantity}</span>
-          <button onClick={() => handleQuantityChange(1)}>+</button>
-        </div>
-        <p className="cart-item-price">₹{item.originalPrice}</p>
-        <p className="cart-item-discounted-price">₹{item.discountedPrice}</p>
-      </div>
-      <button onClick={() => onRemove(item.id)} className="cart-item-remove">
-        🗑️
-      </button>
-    </div>
+    <Box sx={{ padding: 2 }}>
+      <Typography variant="h4" gutterBottom>Shopping Cart</Typography>
+      {cart.length === 0 ? (
+        <Typography variant="h6">Your cart is empty.</Typography>
+      ) : (
+        <Box>
+          {cart.map((product, index) => (
+            <Card key={index} sx={{ display: 'flex', marginBottom: 2 }}>
+              <CardMedia
+                component="img"
+                sx={{ width: 151 }}
+                image={product.image}
+                alt={product.brandName}
+              />
+              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+                <CardContent>
+                  <Typography variant="h6">{product.brandName}</Typography>
+                  <Typography variant="body1">Price: ${product.price}</Typography>
+                  <Typography variant="body2">Discount: {product.discountPercentage}%</Typography>
+                </CardContent>
+              </Box>
+            </Card>
+          ))}
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleBuyNow}
+          >
+            Buy Now
+          </Button>
+        </Box>
+      )}
+    </Box>
   );
 };
 
-export default CartItem;
+export default CartPage;

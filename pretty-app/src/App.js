@@ -19,6 +19,8 @@ import DogClothing from './sliderPages/dogs/dogClothing';
 import DogFoods from './sliderPages/dogs/dogFoods';
 import DogGrooming from './sliderPages/dogs/dogGromming';
 import DogToys from './sliderPages/dogs/dogToys';
+import CartPage from './pages/CartPage';
+import AddressDetailsPage from './userpages/address';
 
 import CatAccessories from './sliderPages/cats/catAccessories';
 import CatClothing from './sliderPages/cats/catClothing';
@@ -50,6 +52,7 @@ import ViewActivity from './userpages/viewActivity';
 
 import PetInfo from './petspages/petsinfo';
 import ProductPage from './pages/ProductDetails'; 
+import OrderConfirm from './pages/OrderConfirm';
 
 //<Route path="/product/:id" element={<ProductDetailsPage />} />      
 
@@ -70,6 +73,10 @@ function App() {
         <Route path="/Accessories" element={<AccessoriesPage />} />
         <Route path="/Food" element={<FoodPage />} />
         <Route path="/Toys" element={<ToysPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/address-details" element={<AddressDetailsPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirm />} />
+
 
         <Route path="/petinfo" element={<PetInfo />} />
 

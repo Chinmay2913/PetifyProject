@@ -8,16 +8,11 @@ import ProductCard from '../components/productCard';
 import  { getData, postData, putData, deleteData, patchData } from '../services/apiservices';
 
 
-// Dummy data for products
-// const products = [
-//   { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry', pet: 'Dog' },
-//   { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy', pet: 'Cat' },
-//   { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy', pet: 'Bird' },
-//   { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry', pet: 'Fish' },
-//   // Add more products as needed
-//   // Add more products as needed
-// ];
-
+const initialProducts = [
+  { image: 'url_to_image_1', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry', pet: 'Dog' },
+  { image: 'url_to_image_2', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy', pet: 'Cat' },
+  { image: 'url_to_image_3', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy', pet: 'Bird' },
+  { image: 'url_to_image_4', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry', pet: 'Fish' },];
 const FilterableProductPage = () => {
   const [filters, setFilters] = useState({
     Price: [],
@@ -27,11 +22,12 @@ const FilterableProductPage = () => {
     Pets: [] 
   });
   
-  const [products, setProducts] = useState([]); // Initialize products state as an empty array
-  const [filteredProducts, setFilteredProducts] = useState([]); // Initialize filteredProducts state
+  const [products, setProducts] = useState(initialProducts); // Initially, set products to the dummy data
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts); // Initially display all products
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
- 
+  const [loading, setLoading] = useState(true); // Track loading state
+  const [error, setError] = useState(null); // Track error state
   // useEffect(() => {
   //   axios.get('your-backend-api-url/products')
   //     .then(response => {
@@ -47,14 +43,17 @@ const FilterableProductPage = () => {
         // Using Global Api file
   //=========================================
   useEffect(() => {
-    // Use getData from the global API service to fetch products
-    getData('/products')  // Replace with your backend API endpoint
-      .then(response => {
-        setProducts(response);  // Set products with the response data
-        setFilteredProducts(response); // Initially set filtered products to all products
+    // Fetch data from backend
+    getData('/products') // Use global API function
+      .then(data => {
+        setProducts(data);
+        setFilteredProducts(data); // Initially set filtered products to all products
+        setLoading(false); // Set loading to false when data is fetched
       })
       .catch(error => {
         console.error('There was an error fetching the products!', error);
+        setError('Failed to fetch products.'); // Set error message
+        setLoading(false); // Set loading to false even if there is an error
       });
   }, []);
  
@@ -119,27 +118,30 @@ const FilterableProductPage = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="filter" onClick={() => setDrawerOpen(true)}>
-            <FilterListIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Product Filters
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <IconButton 
+        color="primary" 
+        aria-label="filter" 
+        onClick={() => setDrawerOpen(true)} 
+        sx={{ 
+          position: 'fixed', 
+          top: '10%', 
+          left: 0, 
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <FilterListIcon />
+      </IconButton>
+
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box sx={{ width: 250, padding: 2 }}>
           {[
             { label: "Price", options: ["0-200", "200-400", "400-600", "600-800", "800-1000"] },
-            { label: "Category", options: ["Soft", "Chew", "Ball", "Smart"] },
+            { label: "Category", options: ["Beds", "Bowls", "Mats", "Collars"] },
             { label: "Discount", options: ["20%", "30%", "40%", "50%", "60%"] },
             { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] },
             { label: "Pets", options: ["Bird", "Cat", "Dog", "Fish", "Others"] } 
-
           ].map(filterCategory => (
-            <Box key={filterCategory.label} sx={{ marginBottom: 2 }}>
+            <Box key={filterCategory.label} sx={{ marginBottom: 2, marginTop: 2 }}>
               <Typography variant="h6" onClick={() => handleExpandClick(filterCategory.label)}>
                 {filterCategory.label} {expanded[filterCategory.label] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </Typography>
@@ -165,6 +167,7 @@ const FilterableProductPage = () => {
           </Button>
         </Box>
       </Drawer>
+
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, padding: 2 }}>
         {filteredProducts.map((product, index) => (
           <ProductCard

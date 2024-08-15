@@ -229,8 +229,8 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed" sx={{ mb: 2 }}>
+    <Box sx={{ flexGrow: 1 , mb: 10 }}>
+      <AppBar position="fixed" sx={{ mb: 2}}>
         <Toolbar>
           <Typography
             variant="h6"

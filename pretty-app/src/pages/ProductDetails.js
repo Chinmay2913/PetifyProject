@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, Button, Box, Card, CardContent, CardMedia, Chip, Grid } from '@mui/material';
-import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { getData } from '../services/apiservices'; // Import your API function
+import { Container, Typography, Button, Box, Card, CardMedia, Chip, Grid,  CircularProgress, Alert  } from '@mui/material';
 import '../cssFiles/ProductPage.css'; // Import the CSS file
 
-// Replace with the URL of your backend API
-const PRODUCT_API_URL = 'https://api.example.com/products';
-
-const ProductPage = ({ productId }) => {
+const ProductPage = () => {
+  const { id } = useParams(); // Get the product ID from the URL
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`${PRODUCT_API_URL}/${productId}`);
-        setProduct(response.data);
-        setSelectedSize(response.data.sizes[0]); // Set initial size
+        const data = await getData(`/products/${id}`); // Fetch product data using global API
+        setProduct(data);
+        setSelectedSize(data.sizes ? data.sizes[0] : ''); // Set initial size if sizes are available
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching product data:', error);
+        setError('Failed to fetch product details.');
+        setLoading(false);
       }
     };
 
     fetchProductData();
-  }, [productId]);
+  }, [id]);
 
   const handleSizeClick = (size) => {
     setSelectedSize(size);
@@ -48,7 +52,21 @@ const ProductPage = ({ productId }) => {
     }
   };
 
-  if (!product) return <Typography>Loading...</Typography>;
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Container className="product-container">
@@ -83,8 +101,8 @@ const ProductPage = ({ productId }) => {
             ))}
           </Box>
           <Box className="price">
-            <Typography className="current-price">{product.currentPrice}</Typography>
-            <Typography className="original-price">{product.originalPrice}</Typography>
+            <Typography className="current-price">${product.currentPrice}</Typography>
+            <Typography className="original-price">${product.originalPrice}</Typography>
             <Typography className="discount">{product.discount}</Typography>
           </Box>
           <Box className="sizes">

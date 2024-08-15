@@ -5,15 +5,14 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ProductCard from '../../components/productCard';
 import axios from 'axios'; // Import Axios
+import  { getData } from '../../services/apiservices';
 
 // Dummy data for products
-const products = [
-  { image: 'url_to_image', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry' },
-  { image: 'url_to_image', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy' },
-  { image: 'url_to_image', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy' },
-  { image: 'url_to_image', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry' },
-  // Add more products as needed
-];
+const initialProducts = [
+  { image: 'url_to_image_1', brandName: 'Brand A', price: 150, discountPercentage: 20, category: 'Veg', type: 'Dry', pet: 'Dog' },
+  { image: 'url_to_image_2', brandName: 'Brand B', price: 350, discountPercentage: 30, category: 'Non-Veg', type: 'Gravy', pet: 'Cat' },
+  { image: 'url_to_image_3', brandName: 'Brand C', price: 550, discountPercentage: 40, category: 'Veg', type: 'Gravy', pet: 'Bird' },
+  { image: 'url_to_image_4', brandName: 'Brand D', price: 750, discountPercentage: 50, category: 'Non-Veg', type: 'Dry', pet: 'Fish' },];
 
 const FilterableProductPage = () => {
   const [filters, setFilters] = useState({
@@ -24,26 +23,27 @@ const FilterableProductPage = () => {
     Brands: []
   });
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [products, setProducts] = useState([]); // State for storing fetched products
+  const [products, setProducts] = useState(initialProducts); // Initially, set products to the dummy data
+  const [filteredProducts, setFilteredProducts] = useState(initialProducts); // Initially display all products
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
+  const [loading, setLoading] = useState(true); // Track loading state
+  const [error, setError] = useState(null); // Track error state
 
   useEffect(() => {
-    // Fetch products from the backend
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('/api/products'); // Adjust the URL as needed
-        setProducts(response.data);
-        setFilteredProducts(response.data); // Initialize filteredProducts with all fetched products
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchProducts();
-  }, []); // Empty dependency array means this effect runs once on component mount
-
+    // Fetch data from backend
+    getData('/products') // Use global API function
+      .then(data => {
+        setProducts(data);
+        setFilteredProducts(data); // Initially set filtered products to all products
+        setLoading(false); // Set loading to false when data is fetched
+      })
+      .catch(error => {
+        console.error('There was an error fetching the products!', error);
+        setError('Failed to fetch products.'); // Set error message
+        setLoading(false); // Set loading to false even if there is an error
+      });
+  }, []);
 
   const handleFilterChange = (filterCategory, option) => {
     setFilters(prevFilters => {

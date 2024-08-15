@@ -112,27 +112,30 @@ const SearchResultsPage = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="filter" onClick={() => setDrawerOpen(true)}>
-            <FilterListIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Product Filters
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <IconButton 
+        color="primary" 
+        aria-label="filter" 
+        onClick={() => setDrawerOpen(true)} 
+        sx={{ 
+          position: 'fixed', 
+          top: '10%', 
+          left: 0, 
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <FilterListIcon />
+      </IconButton>
+
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box sx={{ width: 250, padding: 2 }}>
           {[
             { label: "Price", options: ["0-200", "200-400", "400-600", "600-800", "800-1000"] },
-            { label: "Category", options: ["Veg", "Non-Veg"] },
-            { label: "Type", options: ["Dry", "Gravy"] },
+            { label: "Category", options: ["Beds", "Bowls", "Mats", "Collars"] },
             { label: "Discount", options: ["20%", "30%", "40%", "50%", "60%"] },
             { label: "Brands", options: ["Brand A", "Brand B", "Brand C", "Brand D"] },
-            { label: "Pets", options: ["Bird", "Cat", "Dog", "Fish", "Others"] }
+            { label: "Pets", options: ["Bird", "Cat", "Dog", "Fish", "Others"] } 
           ].map(filterCategory => (
-            <Box key={filterCategory.label} sx={{ marginBottom: 2 }}>
+            <Box key={filterCategory.label} sx={{ marginBottom: 2, marginTop: 2 }}>
               <Typography variant="h6" onClick={() => handleExpandClick(filterCategory.label)}>
                 {filterCategory.label} {expanded[filterCategory.label] ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </Typography>
@@ -158,25 +161,18 @@ const SearchResultsPage = () => {
           </Button>
         </Box>
       </Drawer>
-      <div style={{ padding: '16px' }}>
-        <h1>Search Results</h1>
-        {filteredProducts.length > 0 ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '16px' }}>
-            {filteredProducts.map((result, index) => (
-              <ProductCard
-                key={index}
-                image={result.image}
-                brandName={result.brandName}
-                price={result.price}
-                discountPercentage={result.discountPercentage}
-                onClick={() => handleProductClick(result)}
-              />
-            ))}
-          </div>
-        ) : (
-          <p>No results found.</p>
-        )}
-      </div>
+
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, padding: 2 }}>
+        {filteredProducts.map((product, index) => (
+          <ProductCard
+            key={index}
+            image={product.image}
+            brandName={product.brandName}
+            price={product.price}
+            discountPercentage={product.discountPercentage}
+          />
+        ))}
+      </Box>
     </>
   );
 };
