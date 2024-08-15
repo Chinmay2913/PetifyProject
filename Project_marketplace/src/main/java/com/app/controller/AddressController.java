@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/petify/addresses")
+@RequestMapping("/user/addresses")
 public class AddressController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class AddressController {
                       .orElseThrow(() -> new ResourceNotFoundException("Address not found with id " + id));
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/{userId}")
     public ResponseEntity<List<Address>> getAddressesByUser(@PathVariable Long userId) {
         List<Address> addresses = addressService.findByUserId(userId);
         return new ResponseEntity<>(addresses, HttpStatus.OK);

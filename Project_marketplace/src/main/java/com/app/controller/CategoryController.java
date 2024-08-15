@@ -22,6 +22,7 @@ import com.app.service.CategoryService;
 import com.app.service.SubcategoryService;
 
 @RestController
+@RequestMapping("/categories")
 public class CategoryController {
 
     @Autowired

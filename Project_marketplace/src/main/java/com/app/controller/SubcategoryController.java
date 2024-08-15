@@ -20,6 +20,7 @@ import com.app.exception.ResourceNotFoundException;
 import com.app.service.SubcategoryService;
 
 @RestController
+@RequestMapping("/subcategories")
 public class SubcategoryController {
 
     @Autowired

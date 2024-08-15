@@ -52,7 +52,8 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category; 
     
-
+    private double price;
+    
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<Rating> ratings;
 

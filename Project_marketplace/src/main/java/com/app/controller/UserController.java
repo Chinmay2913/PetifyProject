@@ -30,6 +30,7 @@ public class UserController {
         User savedUser = userService.save(user);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
+    
     //get details
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
