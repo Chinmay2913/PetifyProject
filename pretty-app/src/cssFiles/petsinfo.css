@@ -1,0 +1,49 @@
+/* src/App.css */
+.breeds {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+  }
+  
+  .pet-selector {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+  }
+  
+  .pet-item {
+    cursor: pointer;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .pet-item img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
+  
+  .pet-details {
+    margin-left: 20px;
+    width: 75%;
+  }
+  
+  .pet-details img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+  }
+  
+  .pet-details h1 {
+    color: #ff9c00;
+  }
+  
+  .pet-details h3 {
+    margin-top: 20px;
+  }
+  
+  .pet-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  

@@ -12,11 +12,14 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
+import LoginIcon from '@mui/icons-material/Login';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import { Link } from 'react-router-dom';  // Import Link from react-router-dom
-import ProductCard from './productCard';
+import ProductCard from './productCard'; // Assuming you have this component
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, logOut } from "../Features/userSlice";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -56,6 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
 const categories = [
   { name: 'Food', subtypes: ['dog/food', 'cat/food', 'fish/food', 'birds/food'] },
   { name: 'Clothing', subtypes: ['dog/clothing', 'cat/clothing', 'birds/clothing'] },
@@ -74,6 +78,15 @@ export default function PrimarySearchAppBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const navigate = useNavigate();
 
+  const user = useSelector(selectUser); // Access user state from Redux
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logOut()); // Dispatch the logout action
+    localStorage.removeItem("user");
+    navigate('/login'); // Redirect to login page after logout
+  };
+
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -90,6 +103,7 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -99,22 +113,19 @@ export default function PrimarySearchAppBar() {
       category.subtypes.filter(subtype => subtype.toLowerCase().includes(searchTerm.toLowerCase()))
         .map(subtype => ({ category: category.name, subtype }))
     );
-    //setSearchResults(results);
-    navigate('/search', { state: { searchResults: results } });  };
-  // const handleSearch = () => {
-  //   navigate(`/search?query=${searchTerm}`);
-  // };
+    navigate('/search', { state: { searchResults: results } });
+  };
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       handleSearch();
     }
   };
-  
+
   const handleProductClick = (product) => {
-    // Navigate to the product details page, passing the product ID or any other necessary data
     navigate(`/product/${product.id}`, { state: { product } });
   };
-  
+
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -132,12 +143,25 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>
-        Profile
-      </MenuItem>
-      <MenuItem component={Link} to="/account" onClick={handleMenuClose}>
-        My account
-      </MenuItem>
+      {user ? (
+        <>
+          <MenuItem component={Link} to="/profile" onClick={handleMenuClose}>
+            Profile
+          </MenuItem>
+          <MenuItem onClick={handleLogout}>
+            Log out
+          </MenuItem>
+        </>
+      ) : (
+        <>
+          <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+            Login
+          </MenuItem>
+          <MenuItem component={Link} to="/signup" onClick={handleMenuClose}>
+            Get Started
+          </MenuItem>
+        </>
+      )}
     </Menu>
   );
 
@@ -166,23 +190,40 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Cart</p>
       </MenuItem>
+      <MenuItem component={Link} to="/profile" onClick={handleMobileMenuClose}>
+        <IconButton size="large" aria-label="profile" color="inherit">
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+      {user ? (
+        <MenuItem onClick={handleLogout}>
+          <IconButton size="large" aria-label="logout" color="inherit">
+            <LoginIcon />
+          </IconButton>
+          <p>Log out</p>
+        </MenuItem>
+      ) : (
+        <>
+          <MenuItem component={Link} to="/login" onClick={handleMobileMenuClose}>
+            <IconButton size="large" aria-label="login" color="inherit">
+              <LoginIcon />
+            </IconButton>
+            <p>Login</p>
+          </MenuItem>
+          <MenuItem component={Link} to="/signup" onClick={handleMobileMenuClose}>
+            <IconButton size="large" aria-label="register" color="inherit">
+              <LoginIcon />
+            </IconButton>
+            <p>Get Started</p>
+          </MenuItem>
+        </>
+      )}
       <MenuItem component={Link} to="/contact" onClick={handleMobileMenuClose}>
         <IconButton size="large" aria-label="contact us" color="inherit">
           <ContactMailIcon />
         </IconButton>
         <p>Contact Us</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls={menuId}
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
       </MenuItem>
     </Menu>
   );
@@ -197,64 +238,41 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'flex', sm: 'block' } }}
           >
-            <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>MUI</Link>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src="logo.png" alt="Logo" style={{ height: '40px', marginRight: '16px' }} />
+              MyPetStore
+            </Link>
           </Typography>
           <Search>
             <SearchIconWrapper>
-              <SearchIcon onClick={handleSearch} />
+              <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
-             placeholder="Search…"
+              placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
               value={searchTerm}
               onChange={handleSearchChange}
-              onKeyPress={handleKeyPress}
+              onKeyDown={handleKeyPress}
             />
           </Search>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 4 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', mx: 1, mb: 1 }}>
-              <IconButton
-                size="large"
-                aria-label="show 4 new mails"
-                color="inherit"
-                component={Link}
-                to="/cart"
-              >
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit" component={Link} to="/cart">
+              <Badge badgeContent={4} color="error">
                 <ShoppingCartIcon />
-              </IconButton>
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                <Link to="/cart" style={{ color: 'inherit', textDecoration: 'none' }}>Cart</Link>
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mx: 1, mb: 1 }}>
-              <IconButton
-                size="large"
-                aria-label="contact us"
-                color="inherit"
-                component={Link}
-                to="/contact"
-              >
-                <ContactMailIcon />
-              </IconButton>
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                <Link to="/contact" style={{ color: 'inherit', textDecoration: 'none' }}>Contact Us</Link>
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', mx: 1, mb: 1 }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Typography variant="body2" sx={{ ml: 1 }}>
-                <Link to="/profile" style={{ color: 'inherit', textDecoration: 'none' }}>Profile</Link>
-              </Typography>
-            </Box>
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              {user ? <AccountCircle /> : <LoginIcon />}
+            </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -272,26 +290,24 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-      <Box component="main" sx={{ pt: 8, pb: 2 }}>
-        {/* Display search results using ProductCard */}
-        {searchResults.length > 0 && (
-          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 2 }}>
-            {searchResults.map((result, index) => (
-              <ProductCard
-                key={index}
-                image={result.image}
-                brandName={result.brandName}
-                price={result.price}
-                discountPercentage={result.discountPercentage}
-                onClick={() => handleProductClick(result)}
-              />
-            ))}
-          </Box>
-        )}
-      </Box>
     </Box>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -5,6 +5,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ProductCard from '../components/productCard';
+import  { getData, postData, putData, deleteData, patchData } from '../services/apiservices';
+
 
 // Dummy data for products
 // const products = [
@@ -31,18 +33,32 @@ const FilterableProductPage = () => {
   const [expanded, setExpanded] = useState({});
 
 
+  // useEffect(() => {
+  //   // Fetch data from backend
+  //   axios.get('https://api.example.com/products') // Replace with your backend URL
+  //     .then(response => {
+  //       setProducts(response.data);
+  //       setFilteredProducts(response.data); // Initialize filteredProducts with the full product list
+  //     })
+  //     .catch(error => {
+  //       console.error("There was an error fetching the product data!", error);
+  //     });
+  // }, []);
+
+    //=========================================
+        // Using Global Api file
+  //=========================================
   useEffect(() => {
-    // Fetch data from backend
-    axios.get('https://api.example.com/products') // Replace with your backend URL
+    // Use getData from the global API service to fetch products
+    getData('/products')  // Replace with your backend API endpoint
       .then(response => {
-        setProducts(response.data);
-        setFilteredProducts(response.data); // Initialize filteredProducts with the full product list
+        setProducts(response);  // Set products with the response data
+        setFilteredProducts(response); // Initially set filtered products to all products
       })
       .catch(error => {
-        console.error("There was an error fetching the product data!", error);
+        console.error('There was an error fetching the products!', error);
       });
   }, []);
-
 
   const handleFilterChange = (filterCategory, option) => {
     setFilters(prevFilters => {

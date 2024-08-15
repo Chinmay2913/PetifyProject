@@ -1,6 +1,12 @@
 // src/App.js
 import React from 'react';
 import './App.css';
+import Navigation from './components/appbar';
+import { Provider } from 'react-redux';
+import  store  from './Store/store'; // Adjust path as necessary
+
+
+import Footer from './components/footer';
 import Homepage from './pages/HomePage'; // Import the Homepage component
 import { Routes, Route } from 'react-router-dom';
 import ToysPage from './pages/ToysPage';
@@ -31,22 +37,42 @@ import FishClothing from './sliderPages/fishes/fishClothing';
 import FishFoods from './sliderPages/fishes/fishFoods';
 import FishGrooming from './sliderPages/fishes/fishGromming';
 import FishToys from './sliderPages/fishes/fishToys';
-
+import Login from './pages/login';
+import RegForm from './pages/registrationForm';
 import SearchResultsPage from './pages/Searchpage';
+import ContactPage from './pages/ContactPage';
+
+import Dashboard from './userpages/dashBoard';
+import EditProfile from './userpages/editProfile';
+import ManageSettings from './userpages/manageSettings';
+import ProfilePage from './userpages/profilePage';
+import ViewActivity from './userpages/viewActivity';
+
+import PetInfo from './petspages/petsinfo';
+import ProductPage from './pages/ProductDetails'; 
+
 //<Route path="/product/:id" element={<ProductDetailsPage />} />      
 
 function App() {
   return (
     <div className="App">
+        <Provider store={store}>
+        <Navigation/>
       <Routes>
         <Route path='/' element={<Homepage/>}></Route>
-
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<RegForm />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/Clothing" element={<ClothingsPage />} />
         <Route path="/Grooming" element={<GroomingPage />} />
         <Route path="/Accessories" element={<AccessoriesPage />} />
         <Route path="/Food" element={<FoodPage />} />
         <Route path="/Toys" element={<ToysPage />} />
+
+        <Route path="/petinfo" element={<PetInfo />} />
+
        
         <Route path="/dogs/Accessories" element={<DogAccessories />} />
         <Route path="/dogs/Food" element={<DogFoods />} />
@@ -72,12 +98,17 @@ function App() {
         <Route path="/fish/Grooming" element={<FishGrooming />} />
         <Route path="/fish/Toys" element={<FishToys />} />
 
-              
+        <Route path="/user/dashboard" element={<Dashboard />} />
+        <Route path="/user/editprofile" element={<EditProfile />} />
+        <Route path="/user/managesettings" element={<ManageSettings />} />
+        <Route path="/user/profilepage" element={<ProfilePage />} />
+        <Route path="/user/viewactivity" element={<ViewActivity />} />
 
-
-
+        <Route path="productdetails/:id" element={<ProductPage />} />
 
       </Routes>
+      <Footer/>
+      </Provider>
     </div>
   );
 }

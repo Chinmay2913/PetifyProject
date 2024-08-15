@@ -68,7 +68,7 @@ export default function Footer() {
   return (
     <FooterContainer>
       {/* Social Media Section */}
-      <FooterSection>
+      {/* <FooterSection>
         <Typography variant="body2" color="textSecondary">
           Get connected with us on social networks:
         </Typography>
@@ -92,7 +92,7 @@ export default function Footer() {
             <GitHub />
           </IconButtonStyled>
         </SocialIcons>
-      </FooterSection>
+      </FooterSection> */}
 
       <Divider sx={{ my: 2 }} />
 

@@ -5,6 +5,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ProductCard from '../components/productCard';
+import  { getData, postData, putData, deleteData, patchData } from '../services/apiservices';
+
 
 // // Dummy data for products
 // const products = [
@@ -29,21 +31,34 @@ const FilterableProductPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [expanded, setExpanded] = useState({});
 
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const response = await axios.get('https://your-backend-api-url.com/api/products'); // Replace with your actual backend API URL
+  //       setProducts(response.data);
+  //       setFilteredProducts(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching products:', error);
+  //     }
+  //   };
+
+  //   fetchProducts();
+  // }, []);
+
+  //=========================================
+        // Using Global Api file
+  //=========================================
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('https://your-backend-api-url.com/api/products'); // Replace with your actual backend API URL
-        setProducts(response.data);
-        setFilteredProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchProducts();
+    // Use getData from the global API service to fetch products
+    getData('/products')  // Replace with your backend API endpoint
+      .then(response => {
+        setProducts(response);  // Set products with the response data
+        setFilteredProducts(response); // Initially set filtered products to all products
+      })
+      .catch(error => {
+        console.error('There was an error fetching the products!', error);
+      });
   }, []);
-
-
 
   const handleFilterChange = (filterCategory, option) => {
     setFilters(prevFilters => {
