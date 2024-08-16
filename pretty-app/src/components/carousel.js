@@ -3,7 +3,8 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
 import '../cssFiles/carouselSlides.css';
-
+import petdetails from '../assets/banners/Know your pets.png';
+import getall from '../assets/banners/Product Details.png';
 export default function Example(props) {
     var items = [
         {
@@ -13,12 +14,12 @@ export default function Example(props) {
         },
         {
             id: "Random Name #2",
-            image: "https://img.freepik.com/free-photo/colorful-design-with-spiral-design_188544-9588.jpg?t=st=1722858351~exp=1722861951~hmac=02bb6ad5c0ed3493518416d4b789182f7ef6274f450fd7792d58c35b4c03824a&w=996",
+            image: petdetails,
             link: "/petinfo" // Internal link
         },
         {
             id: "Random Name #3",
-            image: "https://www.shutterstock.com/shutterstock/photos/159086927/display_1500/stock-photo-black-rowan-berries-on-branches-with-red-leaves-on-an-abstract-background-of-autumn-159086927.jpg",
+            image: getall ,
             link: "/products" // Internal link
         }
     ];

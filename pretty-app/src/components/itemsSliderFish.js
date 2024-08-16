@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import ProductCard from '../components/itemSliderCard'; // Import the ProductCard component
 import Lottie from 'lottie-react';
 import animationData from '../assets/fish.json';
+import accesssories from '../assets/fish/accessories.webp'; 
+import foods from '../assets/fish/foods.jpg'; 
+import toys from '../assets/fish/toys.webp'; 
+import clothings from '../assets/fish/cloths.jpg'; 
+import gromming from '../assets/fish/cloths.jpg';
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
@@ -21,38 +26,34 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
 const items = [
   {
     id: "Food",
-    image: "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    brandName: "Brand A",
-    price: 100,
-    discountPercentage: 10
+    image: foods,
+    brandName: "Foods",
+    price: 299,
   },
   {
     id: "Clothing",
-    image: "https://img.freepik.com/free-photo/colorful-design-with-spiral-design_188544-9588.jpg?t=st=1722858351~exp=1722861951~hmac=02bb6ad5c0ed3493518416d4b789182f7ef6274f450fd7792d58c35b4c03824a&w=996",
-    brandName: "Brand B",
+    image: clothings,
+    brandName: "Clothings",
     price: 200,
-    discountPercentage: 20
   },
   {
     id: "Grooming",
-    image: "https://www.shutterstock.com/shutterstock/photos/159086927/display_1500/stock-photo-black-rowan-berries-on-branches-with-red-leaves-on-an-abstract-background-of-autumn-159086927.jpg",
-    brandName: "Brand C",
+    image: gromming,
+    brandName: "Gromming",
     price: 150,
-    discountPercentage: 15
   },
   {
     id: "Accessories",
-    image: "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    brandName: "Brand D",
+    image: accesssories,
+    brandName: "Accessories",
     price: 120,
-    discountPercentage: 12
+
   },
   {
     id: "Toys",
-    image: "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    brandName: "Brand D",
+    image: toys,
+    brandName: "Toys",
     price: 120,
-    discountPercentage: 12
   },
   // Additional items...
 ];
@@ -109,7 +110,7 @@ export default function CategoryCarousel() {
       {/* Carousel with static items */}
       <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden', marginLeft:'1%' }}>
 
-        <CarouselContainer sx={{ transform: `translateX(-${currentIndex * (100 / itemsPerSlide)}%)` }}>
+      <CarouselContainer sx={{ transform: `translateX(-${currentIndex * (100 / itemsPerSlide)}%)` }}>
           {items.map((item, i) => (
             <Box key={i} sx={{ flex: '0 0 19%', margin: '4px 5px' }}>
               <ProductCard
@@ -117,7 +118,6 @@ export default function CategoryCarousel() {
                 image={item.image}
                 brandName={item.brandName}
                 price={item.price}
-                discountPercentage={item.discountPercentage}
                 onClick={() => handleCardClick(item.id)}
               />
             </Box>

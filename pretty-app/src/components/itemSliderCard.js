@@ -57,11 +57,18 @@ const ProductCard = ({ image, brandName, price, discountPercentage, onClick }) =
               mt: 1
             }}
           >
-            <Typography variant="body2" color="text.primary" >
-              Price: ${price}
-            </Typography>
-            <Typography variant="body2" color="text.primary">
-              {discountPercentage}% off
+<Typography 
+  variant="body5" 
+  component="div" 
+  color="text.primary"  
+  sx={{ 
+    fontWeight: 'bold',
+    textAlign: 'center',  // Center the text horizontally // Ensure the text is centered vertically if there's more content above or below
+    display: 'flex',
+    justifyContent: 'center',  // Aligns text in the center horizontally within the flex container
+    alignItems: 'center',      // Aligns text in the center vertically within the flex container
+  }}
+>             Starting From Rs. {price} only
             </Typography>
           </Box>
         </CardContent>
