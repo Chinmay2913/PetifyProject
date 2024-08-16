@@ -24,6 +24,7 @@ import com.app.service.SubcategoryService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
+@RequestMapping("/home")
 public class HomeController {
 
     @Autowired

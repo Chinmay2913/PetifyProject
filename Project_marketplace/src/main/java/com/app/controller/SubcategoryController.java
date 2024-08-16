@@ -51,7 +51,7 @@ public class SubcategoryController {
         return new ResponseEntity<>(subcategories, HttpStatus.OK);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/{name}")
     public ResponseEntity<SubCategory> getSubcategoryByName(@PathVariable String name) {
         Optional<SubCategory> subcategory = subcategoryService.findByName(name);
         return subcategory.map(ResponseEntity::ok)
