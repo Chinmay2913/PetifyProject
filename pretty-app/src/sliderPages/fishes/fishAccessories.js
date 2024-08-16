@@ -103,16 +103,19 @@ const FilterableProductPage = () => {
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="filter" onClick={() => setDrawerOpen(true)}>
-            <FilterListIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            Product Filters
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <IconButton 
+        color="primary" 
+        aria-label="filter" 
+        onClick={() => setDrawerOpen(true)} 
+        sx={{ 
+          position: 'fixed', 
+          top: '10%', 
+          left: 0, 
+          transform: 'translateY(-50%)',
+        }}
+      >
+        <FilterListIcon />
+      </IconButton>
       <Drawer anchor="left" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box sx={{ width: 250, padding: 2 }}>
           {[

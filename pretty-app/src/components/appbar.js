@@ -84,7 +84,7 @@ export default function PrimarySearchAppBar() {
   const handleLogout = () => {
     dispatch(logOut()); // Dispatch the logout action
     localStorage.removeItem("user");
-    navigate('/login'); // Redirect to login page after logout
+    navigate('/validate'); // Redirect to login page after logout
   };
 
   const handleProfileMenuOpen = (event) => {
@@ -113,7 +113,10 @@ export default function PrimarySearchAppBar() {
       category.subtypes.filter(subtype => subtype.toLowerCase().includes(searchTerm.toLowerCase()))
         .map(subtype => ({ category: category.name, subtype }))
     );
-    navigate('/search', { state: { searchResults: results } });
+  
+    const queryString = new URLSearchParams({ query: searchTerm }).toString();
+  
+    navigate(`/search?${queryString}`, { state: { searchResults: results } });
   };
 
   const handleKeyPress = (event) => {
@@ -154,10 +157,10 @@ export default function PrimarySearchAppBar() {
         </>
       ) : (
         <>
-          <MenuItem component={Link} to="/login" onClick={handleMenuClose}>
+          <MenuItem component={Link} to="/user/validate" onClick={handleMenuClose}>
             Login
           </MenuItem>
-          <MenuItem component={Link} to="/signup" onClick={handleMenuClose}>
+          <MenuItem component={Link} to="/user" onClick={handleMenuClose}>
             Get Started
           </MenuItem>
         </>
@@ -205,13 +208,13 @@ export default function PrimarySearchAppBar() {
         </MenuItem>
       ) : (
         <>
-          <MenuItem component={Link} to="/login" onClick={handleMobileMenuClose}>
+          <MenuItem component={Link} to="/user/validate" onClick={handleMobileMenuClose}>
             <IconButton size="large" aria-label="login" color="inherit">
               <LoginIcon />
             </IconButton>
             <p>Login</p>
           </MenuItem>
-          <MenuItem component={Link} to="/signup" onClick={handleMobileMenuClose}>
+          <MenuItem component={Link} to="/user" onClick={handleMobileMenuClose}>
             <IconButton size="large" aria-label="register" color="inherit">
               <LoginIcon />
             </IconButton>

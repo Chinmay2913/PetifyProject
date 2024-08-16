@@ -37,7 +37,7 @@ function LoginForm() {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await fetch("/api/login", {
+        const response = await fetch("/api/user/validate", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

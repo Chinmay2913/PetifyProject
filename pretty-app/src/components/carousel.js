@@ -19,7 +19,7 @@ export default function Example(props) {
         {
             id: "Random Name #3",
             image: "https://www.shutterstock.com/shutterstock/photos/159086927/display_1500/stock-photo-black-rowan-berries-on-branches-with-red-leaves-on-an-abstract-background-of-autumn-159086927.jpg",
-            link: "/petinfo" // Internal link
+            link: "/products" // Internal link
         }
     ];
 

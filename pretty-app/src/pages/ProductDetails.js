@@ -105,20 +105,6 @@ const ProductPage = () => {
             <Typography className="original-price">${product.originalPrice}</Typography>
             <Typography className="discount">{product.discount}</Typography>
           </Box>
-          <Box className="sizes">
-            <Typography variant="subtitle1">Sizes:</Typography>
-            <Box>
-              {product.sizes.map(size => (
-                <Button
-                  key={size}
-                  className={`size ${selectedSize === size ? 'active' : ''}`}
-                  onClick={() => handleSizeClick(size)}
-                >
-                  {size}
-                </Button>
-              ))}
-            </Box>
-          </Box>
           <Button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</Button>
         </Grid>
       </Grid>

@@ -53,6 +53,7 @@ import ViewActivity from './userpages/viewActivity';
 import PetInfo from './petspages/petsinfo';
 import ProductPage from './pages/ProductDetails'; 
 import OrderConfirm from './pages/OrderConfirm';
+import ProductsList from './pages/getallProducts';
 
 //<Route path="/product/:id" element={<ProductDetailsPage />} />      
 
@@ -64,8 +65,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage/>}></Route>
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<RegForm />} />
+        <Route path="/user/validate" element={<Login />} />
         <Route path="/signup" element={<RegForm />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/Clothing" element={<ClothingsPage />} />
@@ -76,6 +77,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/address-details" element={<AddressDetailsPage />} />
         <Route path="/order-confirmation" element={<OrderConfirm />} />
+        <Route path="/products" element={<ProductsList />} />
 
 
         <Route path="/petinfo" element={<PetInfo />} />
@@ -111,7 +113,7 @@ function App() {
         <Route path="/user/profilepage" element={<ProfilePage />} />
         <Route path="/user/viewactivity" element={<ViewActivity />} />
 
-        <Route path="productdetails/:id" element={<ProductPage />} />
+        <Route path="products/:id" element={<ProductPage />} />
 
       </Routes>
       <Footer/>
