@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { Container, Grid, Paper, Typography, Switch, FormControlLabel, Button } from '@mui/material';
 
+// Settings configuration stored in an array
+const settingsConfig = [
+  { id: 'notifications', label: 'Email Notifications', defaultValue: true },
+  { id: 'privateAccount', label: 'Private Account', defaultValue: false },
+  { id: 'twoFactorAuth', label: 'Two-Factor Authentication', defaultValue: false }
+];
+
 const ManageSettingsPage = () => {
-  const [settings, setSettings] = useState({
-    notifications: true,
-    privateAccount: false,
-    twoFactorAuth: false,
-  });
+  // Initialize state dynamically based on settingsConfig
+  const initialState = settingsConfig.reduce((acc, setting) => {
+    acc[setting.id] = setting.defaultValue;
+    return acc;
+  }, {});
+
+  const [settings, setSettings] = useState(initialState);
 
   const handleToggle = (event) => {
     const { name, checked } = event.target;
@@ -30,39 +39,21 @@ const ManageSettingsPage = () => {
         <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
             <Typography variant="h6">Account Settings</Typography>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={settings.notifications}
-                  onChange={handleToggle}
-                  name="notifications"
-                  color="primary"
-                />
-              }
-              label="Email Notifications"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={settings.privateAccount}
-                  onChange={handleToggle}
-                  name="privateAccount"
-                  color="primary"
-                />
-              }
-              label="Private Account"
-            />
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={settings.twoFactorAuth}
-                  onChange={handleToggle}
-                  name="twoFactorAuth"
-                  color="primary"
-                />
-              }
-              label="Two-Factor Authentication"
-            />
+            {/* Map through settingsConfig to dynamically generate the form */}
+            {settingsConfig.map((setting) => (
+              <FormControlLabel
+                key={setting.id}
+                control={
+                  <Switch
+                    checked={settings[setting.id]}
+                    onChange={handleToggle}
+                    name={setting.id}
+                    color="primary"
+                  />
+                }
+                label={setting.label}
+              />
+            ))}
           </Paper>
         </Grid>
         <Grid item xs={12}>
@@ -95,99 +86,111 @@ export default ManageSettingsPage;
 
 
 
-// import React from 'react'
 
-// function ManageSetting() {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
 
-// export default ManageSetting
+
+
+
+
+
+
+
 
 
 // import React, { useState } from 'react';
-// import { Container, Typography, Paper, TextField, FormControl, InputLabel, Select, MenuItem, Button, FormControlLabel, Switch } from '@mui/material';
-// import './ManageSettings.css';
+// import { Container, Grid, Paper, Typography, Switch, FormControlLabel, Button } from '@mui/material';
 
-// const ManageSettings = () => {
+// const ManageSettingsPage = () => {
 //   const [settings, setSettings] = useState({
-//     username: '',
-//     email: '',
-//     theme: 'light',
 //     notifications: true,
+//     privateAccount: false,
+//     twoFactorAuth: false,
 //   });
 
-//   const handleChange = (event) => {
-//     const { name, value, type, checked } = event.target;
-//     setSettings({
-//       ...settings,
-//       [name]: type === 'checkbox' ? checked : value,
-//     });
+//   const handleToggle = (event) => {
+//     const { name, checked } = event.target;
+//     setSettings((prevState) => ({
+//       ...prevState,
+//       [name]: checked,
+//     }));
 //   };
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     console.log('Settings updated:', settings);
+//   const handleSaveChanges = () => {
+//     console.log('Settings saved:', settings);
 //     alert('Settings updated successfully!');
 //   };
 
 //   return (
-//     <Container className="container">
-//       <Typography variant="h4" gutterBottom>
+//     <Container maxWidth="md">
+//       <Typography variant="h4" sx={{ mb: 4 }}>
 //         Manage Settings
 //       </Typography>
-//       <Paper className="paper">
-//         <form onSubmit={handleSubmit}>
-//           <TextField
-//             label="Username"
-//             name="username"
-//             value={settings.username}
-//             onChange={handleChange}
-//             fullWidth
-//             margin="normal"
-//           />
-//           <TextField
-//             label="Email"
-//             name="email"
-//             type="email"
-//             value={settings.email}
-//             onChange={handleChange}
-//             fullWidth
-//             margin="normal"
-//           />
-//           <FormControl fullWidth margin="normal">
-//             <InputLabel>Theme</InputLabel>
-//             <Select
-//               name="theme"
-//               value={settings.theme}
-//               onChange={handleChange}
-//             >
-//               <MenuItem value="light">Light</MenuItem>
-//               <MenuItem value="dark">Dark</MenuItem>
-//             </Select>
-//           </FormControl>
-//           <FormControlLabel
-//             control={
-//               <Switch
-//                 name="notifications"
-//                 checked={settings.notifications}
-//                 onChange={handleChange}
-//               />
-//             }
-//             label="Enable Notifications"
-//           />
-//           <Button type="submit" variant="contained" color="primary" className="submit-button">
+//       <Grid container spacing={3}>
+//         <Grid item xs={12}>
+//           <Paper sx={{ p: 2 }}>
+//             <Typography variant="h6">Account Settings</Typography>
+//             <FormControlLabel
+//               control={
+//                 <Switch
+//                   checked={settings.notifications}
+//                   onChange={handleToggle}
+//                   name="notifications"
+//                   color="primary"
+//                 />
+//               }
+//               label="Email Notifications"
+//             />
+//             <FormControlLabel
+//               control={
+//                 <Switch
+//                   checked={settings.privateAccount}
+//                   onChange={handleToggle}
+//                   name="privateAccount"
+//                   color="primary"
+//                 />
+//               }
+//               label="Private Account"
+//             />
+//             <FormControlLabel
+//               control={
+//                 <Switch
+//                   checked={settings.twoFactorAuth}
+//                   onChange={handleToggle}
+//                   name="twoFactorAuth"
+//                   color="primary"
+//                 />
+//               }
+//               label="Two-Factor Authentication"
+//             />
+//           </Paper>
+//         </Grid>
+//         <Grid item xs={12}>
+//           <Button
+//             variant="contained"
+//             color="primary"
+//             onClick={handleSaveChanges}
+//             sx={{ mt: 2 }}
+//           >
 //             Save Changes
 //           </Button>
-//         </form>
-//       </Paper>
+//         </Grid>
+//       </Grid>
 //     </Container>
 //   );
 // };
 
-// export default ManageSettings;
+// export default ManageSettingsPage;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
