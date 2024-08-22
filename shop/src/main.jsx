@@ -4,9 +4,9 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CreateProductForm from './component/pages/CreateProductForm.jsx';
 import Customers from './component/pages/Customer.jsx';
-//import ViewActivity from './component/pages/ViewActivity.jsx';
-//import ManageSetting from './component/pages/ManageSetting.jsx';
-//import ProfilePage from './component/pages/ProfilePage.jsx';
+import ViewActivity from './component/pages/ViewActivity.jsx';
+import ManageSetting from './component/pages/ManageSetting.jsx';
+import ProfilePage from './component/pages/ProfilePage.jsx';
 import './index.css';
 import App from './App.jsx';
 import AddressCard from './component/pages/AddreessCard.jsx';
@@ -17,10 +17,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: 'create-product', element: <CreateProductForm /> },
-      //{ path: 'profile', element: <ProfilePage /> },
+      { path: 'profile', element: <ProfilePage /> },
       { path: 'customer', element: <Customers /> },
-     // { path: 'view-activity', element: <ViewActivity /> },
-      //{ path: 'manage-settings', element: <ManageSetting /> },
+     { path: 'view-activity', element: <ViewActivity /> },
+      { path: 'manage-settings', element: <ManageSetting /> },
       {path: 'address', element: <AddressCard />}
     ],
   },
