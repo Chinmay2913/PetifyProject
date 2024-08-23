@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Info</title>
+    <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Know Your Pet</h1>
+        <div class="animal-icons">
+            <div class="animal-icon" data-animal="dog">
+                <img src="/icons/dog.avif" alt="Dog">
+                <p>Dogs</p>
+            </div>
+            <div class="animal-icon" data-animal="cat">
+                <img src="/icons/cat.avif" alt="Cat">
+                <p>Cats</p>
+            </div>
+            <div class="animal-icon" data-animal="bird">
+                <img src="/icons/bird.avif" alt="Bird">
+                <p>Birds</p>
+            </div>
+            <div class="animal-icon" data-animal="fish">
+                <img src="/icons/fish.avif" alt="Fish">
+                <p>Fish</p>
+            </div>
+            <div class="animal-icon" data-animal="other">
+                <img src="/icons/other.avif" alt="Other">
+                <p>Other</p>
+            </div>
+        </div>
+        <div id="breeds-section">
+            <h2 id="breeds-title" style="display:none;">Breeds</h2>
+            <div id="breeds" class="breeds-grid"></div>
+        </div>
+        <div id="breed-info-section" style="display:none;">
+            <h2>Breed Info</h2>
+            <div id="breed-info" class="breed-info"></div>
+        </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
